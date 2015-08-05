@@ -1,0 +1,108 @@
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="Via">
+    <annotation name="ActionScriptGeneration">
+      <item name="WSDL-service">via</item>
+      <item name="ServiceType">WebService</item>
+      <item name="WSDL">http://myxph.com/services/via.asmx?wsdl</item>
+      <item name="Package">services.via</item>
+      <item name="WSDL-port">viaSoap</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">WebService</item>
+    </annotation>
+    <annotation name="WSDLCollectionElementTypes">
+      <item name="http://www.myxph.com/,ArrayOfShow">Show::http://www.myxph.com/,Show</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="DEFAULT_ENTITY_PACKAGE">valueObjects</item>
+      <item name="WSDL-endpoint">http://myxph.com/services/via.asmx</item>
+      <item name="LINKED_FILE"></item>
+    </annotation>
+    <function name="GetUserDetailsBySessionID" return-type="User">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction">http://www.myxph.com/GetUserDetailsBySessionID</item>
+        <item name="GetUserDetailsBySessionID">http://www.myxph.com/,GetUserDetailsBySessionID</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">User</item>
+      </annotation>
+      <parameter name="sessionid" type="string"/>
+    </function>
+    <function name="GetCurrentShows" return-type="Show[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction">http://www.myxph.com/GetCurrentShows</item>
+        <item name="GetCurrentShows">http://www.myxph.com/,GetCurrentShows</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">Show</item>
+      </annotation>
+    </function>
+    <function name="GetUserDetailsByEmail" return-type="User">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="WSDLName">
+        <item name="SOAPAction">http://www.myxph.com/GetUserDetailsByEmail</item>
+        <item name="GetUserDetailsByEmail">http://www.myxph.com/,GetUserDetailsByEmail</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="inputParams">string</item>
+        <item name="returnType">User</item>
+      </annotation>
+      <parameter name="email" type="string"/>
+    </function>
+  </service>
+  <entity name="User">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">User</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">Via</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="userid" type="string"/>
+    <property name="emailaddress" type="string"/>
+    <property name="firstname" type="string"/>
+    <property name="middlename" type="string"/>
+    <property name="lastname" type="string"/>
+    <property name="birthdate" type="date"/>
+    <property name="province_name" type="string"/>
+    <property name="city_name" type="string"/>
+    <property name="ip" type="string"/>
+    <property name="show" type="Show"/>
+  </entity>
+  <entity name="Show">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">Show</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">Via</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">valueObjects</item>
+    </annotation>
+    <property name="showid" type="integer"/>
+    <property name="title" type="string"/>
+    <property name="showdatestart" type="date"/>
+    <property name="showdateend" type="date"/>
+  </entity>
+</model>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			protected function openApp_clickHandler(event:MouseEvent):void
+			{
+				navigateToURL(new URLRequest("http://localhost/abs/userclient.swf?sessionid="+myCB.selectedItem.sessionid.toString()));
+				//navigateToURL(new URLRequest("http://virtualaudience.abs-cbn.com/abs/userclient.swf?sessionid="+myCB.selectedItem.sessionid.toString()));
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:HGroup height="100%" width="100%" horizontalAlign="center" verticalAlign="middle">
+		<s:ComboBox id="myCB" width="140" prompt="Select a User" labelField="value" selectedIndex="0"> 
+			<s:dataProvider>
+				<mx:ArrayList>
+					<fx:Object value="01" sessionid="978978978"/>
+					<fx:Object value="02" sessionid="413213244"/>
+					<fx:Object value="03" sessionid="546554654"/>
+					<fx:Object value="04" sessionid="154613213"/>
+					<fx:Object value="05" sessionid="654564566"/>
+					<fx:Object value="06" sessionid="785678967"/>
+					<fx:Object value="07" sessionid="678867885"/>
+					<fx:Object value="08" sessionid="258286862"/>
+					<fx:Object value="09" sessionid="789678978"/>
+					<fx:Object value="10" sessionid="349783142"/>
+					<fx:Object value="11" sessionid="978151345"/>
+					<fx:Object value="12" sessionid="435648978"/>
+					<fx:Object value="13" sessionid="354453128"/>
+					<fx:Object value="14" sessionid="256868921"/>
+					<fx:Object value="15" sessionid="372141744"/>
+					<fx:Object value="16" sessionid="971187369"/>
+					<fx:Object value="17" sessionid="123356778"/>
+					<fx:Object value="18" sessionid="457658768"/>
+					<fx:Object value="19" sessionid="963354627"/>
+					<fx:Object value="20" sessionid="782936489"/>
+					<fx:Object value="21" sessionid="362512544"/>
+					<fx:Object value="22" sessionid="583521742"/>
+					<fx:Object value="23" sessionid="325147586"/>
+					<fx:Object value="24" sessionid="798527822"/>
+					<fx:Object value="25" sessionid="741368396"/>
+					<fx:Object value="26" sessionid="632127572"/>
+					<fx:Object value="27" sessionid="139633678"/>
+					<fx:Object value="28" sessionid="375936275"/>
+					<fx:Object value="29" sessionid="798784564"/>
+					<fx:Object value="30" sessionid="645321313"/>
+				</mx:ArrayList>
+			</s:dataProvider>
+		</s:ComboBox>
+		<s:Button id="openApp" click="openApp_clickHandler(event)" label="Open Application"/>
+	</s:HGroup>
+</s:Application>

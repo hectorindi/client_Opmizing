@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:components="components.*"
+			   initialize="basicPrivateChat_initializeHandler(event)" 
+			   skinClass="skins.ApplicationBackgroundSkin"
+			   creationComplete="application1_creationCompleteHandler(event)"
+			   width="974" height="656">
+	<fx:Style source="BasicPrivateChat_v4Styles.css"/>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here --> 
+		<mx:ArrayList id="usersListLocal">
+			<fx:Object value="01" sessionID="978978978" userid="5469781" emailaddress="test01@test.com" userName="test1" province_name="test G" city_name="Test City" birthdate="13 Dec 1988"/>
+			<fx:Object value="02" sessionID="413213244" userid="4132546" emailaddress="test02@test.com" userName="test2" province_name="test P" city_name="Test City" birthdate="13 Dec 1987"/>
+			<fx:Object value="03" sessionID="546554654" userid="9783241" emailaddress="test03@test.com" userName="test3" province_name="test Y" city_name="Test City" birthdate="13 Dec 1982"/>
+			<fx:Object value="04" sessionID="154613213" userid="5467844" emailaddress="test04@test.com" userName="test4" province_name="test U" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="05" sessionID="654564566" userid="6755422" emailaddress="test05@test.com" userName="test5" province_name="test J" city_name="Test City" birthdate="13 Dec 1988"/>
+			<fx:Object value="06" sessionID="785678967" userid="6781237" emailaddress="test06@test.com" userName="test6" province_name="test H" city_name="Test City" birthdate="13 Dec 1984"/>
+			<fx:Object value="07" sessionID="678867885" userid="2125313" emailaddress="test07@test.com" userName="test7" province_name="test M" city_name="Test City" birthdate="13 Dec 1981"/>
+			<fx:Object value="08" sessionID="258286862" userid="3225462" emailaddress="test08@test.com" userName="test8" province_name="test N" city_name="Test City" birthdate="13 Dec 1989"/>
+			<fx:Object value="09" sessionID="789678978" userid="7654233" emailaddress="test09@test.com" userName="test9" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="10" sessionID="349783142" userid="7631725" emailaddress="test10@test.com" userName="test10" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="11" sessionID="978151345" userid="7586932" emailaddress="test11@test.com" userName="test11" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="12" sessionID="435648978" userid="7257255" emailaddress="test12@test.com" userName="test12" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="13" sessionID="354453128" userid="1747856" emailaddress="test13@test.com" userName="test13" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="14" sessionID="256868921" userid="9362752" emailaddress="test14@test.com" userName="test14" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="15" sessionID="372141744" userid="7825968" emailaddress="test15@test.com" userName="test15" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="16" sessionID="971187369" userid="3124687" emailaddress="test16@test.com" userName="test16" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="17" sessionID="123356778" userid="7527582" emailaddress="test17@test.com" userName="test17" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="18" sessionID="457658768" userid="1325463" emailaddress="test18@test.com" userName="test18" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="19" sessionID="963354627" userid="9784355" emailaddress="test19@test.com" userName="test19" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="20" sessionID="782936489" userid="1323759" emailaddress="test20@test.com" userName="test20" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="21" sessionID="362512544" userid="2589361" emailaddress="test21@test.com" userName="test21" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="22" sessionID="583521742" userid="1327576" emailaddress="test22@test.com" userName="test22" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="23" sessionID="325147586" userid="4567893" emailaddress="test23@test.com" userName="test23" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="24" sessionID="798527822" userid="8858453" emailaddress="test24@test.com" userName="test24" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="25" sessionID="741368396" userid="7773455" emailaddress="test25@test.com" userName="test25" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="26" sessionID="632127572" userid="2789768" emailaddress="test26@test.com" userName="test26" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="27" sessionID="139633678" userid="3968745" emailaddress="test27@test.com" userName="test27" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="28" sessionID="375936275" userid="5646545" emailaddress="test28@test.com" userName="test28" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="29" sessionID="798784564" userid="3275835" emailaddress="test29@test.com" userName="test29" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+			<fx:Object value="30" sessionID="645321313" userid="7834542" emailaddress="test30@test.com" userName="test30" province_name="test R" city_name="Test City" birthdate="13 Dec 1983"/>
+		</mx:ArrayList>
+	</fx:Declarations>
+	<s:states>
+		<s:State name="loading"/>
+		<s:State name="completed"/>
+	</s:states>
+	
+	<fx:Metadata>
+		[Event(name="login", type="events.LoginEvent")]
+	</fx:Metadata>
+	<fx:Script>
+		<![CDATA[
+			import com.encast.AppManager;
+			import com.encast.ConnectionProperties;
+			import com.encast.NetConnectionClient;
+			import com.encast.NetConnectionManager;
+			import com.encast.WowzaCustomEvent;
+			
+			import events.LoginEvent;
+			
+			import interfaces.IpopUp;
+			
+			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.rpc.events.FaultEvent;
+			
+			import valueObjects.User;
+			
+			private var _nc:NetConnectionManager;
+			private var _ncClient:NetConnectionClient;
+			private var _connectionProps:ConnectionProperties;
+			private var _userID:Number;
+			private var _userName:String;
+			private var _isPresenter:Boolean;
+			private var _sessionID:String;
+			private var _sessionUser:Object;
+			
+			private var _goToPrivateChat:Boolean = false;
+			private var _privateRoomName:String = "";
+			
+			private var _privateChatHistory:Array;
+			private var _userRole:int = 0;
+			
+			//these are to keep track what is happening with the connection
+			private var _connectionIsRejected:Boolean = false;
+			private var _connectionHasFailed:Boolean = false;
+			private var _hasClosedConnection:Boolean = false;
+			
+			
+			
+			protected function basicPrivateChat_initializeHandler(event:FlexEvent):void{
+				_connectionProps = new ConnectionProperties();	
+			}
+			
+			
+			private function callWService(user:Object):void
+			{
+				var loginService:URLRequest = new URLRequest("checkShow.asp");
+				var loginServiceLoader:URLLoader = new URLLoader(loginService);
+				loginServiceLoader.dataFormat = URLLoaderDataFormat.VARIABLES;
+				loginServiceLoader.addEventListener(Event.COMPLETE, wsLoadCompleteError);
+				loginServiceLoader.addEventListener(IOErrorEvent.IO_ERROR, onLoginServiceIOError);
+				loginServiceLoader.addEventListener(ErrorEvent.ERROR, onLoginServiceIOError);
+				loginServiceLoader.load(loginService);   
+			}
+			
+			private function wsLoadComplete():void
+			{
+				var showDetails:Object = new Object();
+				if(showDetails != null)
+				{
+					//var showid:String = showDetails.show.show_id;
+					var showid:String = "3"//showDetails[0];
+					//var instaceName:String =  showDetails.show.application_id;
+					var instaceName:String =  "VA1"//showDetails[1];
+					_connectionProps.setInstanceName(instaceName);
+					login(_sessionUser);
+				}
+				else
+				{
+					 var newVrl1:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+					navigateToURL(new URLRequest(newVrl1), "_self");  
+				}
+			}
+			
+			private function wsLoadCompleteError(e:Event):void
+			{
+				trace("loading show manager webservice faild")
+			}
+			
+			private function login(user:Object):void{
+				_nc = new NetConnectionManager();
+				_nc.objectEncoding = ObjectEncoding.AMF0;
+				_nc.addEventListener("onConnect", onConnect);
+				_nc.addEventListener("onFailed", onFailed);
+				_nc.addEventListener("onClosed", onClosed);
+				_nc.addEventListener("onRejected", onRejected);
+				//_nc.addEventListener(ErrorEvent.ERROR, onError);
+				_nc.addEventListener(NetStatusEvent.NET_STATUS,onStatus);
+				_ncClient = new NetConnectionClient();
+				_ncClient.addEventListener(NetConnectionClient.ON_USERID, onSetUserID);				
+				_ncClient.addEventListener(NetConnectionClient.ON_RECEIVE_INVITE, onReceiveInvite);
+				_ncClient.addEventListener(NetConnectionClient.ON_ACCEPT_INVITE, onAcceptInvite);
+				
+				_ncClient.addEventListener(NetConnectionClient.ON_KICKED, onKicked);
+				_ncClient.addEventListener(NetConnectionClient.ON_BANNED, onBanned);
+				_ncClient.addEventListener(NetConnectionClient.ON_BANNED_USERS_LIST, onBannedUsersList);
+				_ncClient.addEventListener(NetConnectionClient.ON_CLOSE_PRIVATE_CHAT, closePrivateChat);
+				_ncClient.addEventListener(NetConnectionClient.ON_PRIVATE_CHAT, onPrivateChat);
+				_ncClient.addEventListener(NetConnectionClient.ON_REFRESH_USERS, onUserRefresh);
+				
+				_ncClient.addEventListener(NetConnectionClient.ON_START_PRIVATE_VID_CHAT, onStratPrivateVidChat);
+				_ncClient.addEventListener(NetConnectionClient.ON_CLOSE_PRIVATE_VID_CHAT, onClosePrivateVidChat);
+				_ncClient.addEventListener(NetConnectionClient.ON_SHOW_POLL, onShowPolls);
+				_ncClient.addEventListener(NetConnectionClient.ON_UPDATE_USER, onUpdateUser);
+				_ncClient.addEventListener("userAddedToShow", updateUserStatus);
+				_ncClient.addEventListener("userRemoved", updateUserStatusRemove);
+				_ncClient.addEventListener("onDisablePoll", onDisablePoll);
+				
+				_nc.client = _ncClient;
+				trace("rtmp://" + _connectionProps.getServerIP() + "/" + _connectionProps.getApplicationName() + "/" + _connectionProps.getInstanceName());
+				_nc.connect("rtmp://" + _connectionProps.getServerIP() + "/" + _connectionProps.getApplicationName() + "/" + _connectionProps.getInstanceName(), user);
+			}
+			
+			private function updateUserStatus(event:Event):void{
+				clientLobby.updateShowStatus("ON-AIR");
+			}
+			
+			private function updateUserStatusRemove(event:Event):void{
+				clientLobby.updateShowStatus("OFF-AIR");
+			}
+			
+			private function onDisablePoll(event:WowzaCustomEvent):void
+			{
+				clientLobby.disablePoll(event.eventObj);
+			}
+			
+			private function onConnect(event:NetStatusEvent):void{
+				
+			}
+			
+			private function onError(event:Error):void
+			{
+				var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+				navigateToURL(new URLRequest(newVrl), "_self"); 
+			}
+			
+			private function onStatus(event:NetStatusEvent):void
+			{
+				
+			}
+			
+			private function onClosed(event:NetStatusEvent):void{
+				if(_connectionHasFailed != true && _connectionIsRejected != true && _hasClosedConnection != true || _goToPrivateChat != true){
+					//show that the connection died for whatever reason (network issue probably)		
+					
+					AppManager.getInstance().ShowUserArray=null;
+					AppManager.getInstance().showArrPos=-1;
+					
+					AppManager.getInstance().userID=0;
+					AppManager.getInstance().userName="";
+					AppManager.getInstance().userRole=0; 
+					
+					
+					var eve:WowzaCustomEvent = new WowzaCustomEvent("streamStop",true,true);
+					
+					//stop all video pods here
+					
+					closeAllWindows();
+				}
+				
+				//var newVrl:String = "http://192.168.2.155/collab/collaboration.html"
+				var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+				navigateToURL(new URLRequest(newVrl), "_self"); 
+				trace("Connection closed : "+event.info)
+				//here again stop user videos and destroy mechenism
+			}
+			
+			private function onFailed(event:NetStatusEvent):void{
+				var eve:WowzaCustomEvent = new WowzaCustomEvent("streamStop",true,true);
+				
+				AppManager.getInstance().ShowUserArray=null;
+				AppManager.getInstance().showArrPos=-1;
+				AppManager.getInstance().userID=0;
+				AppManager.getInstance().userName="";
+				AppManager.getInstance().userRole=0;
+				
+				//reset videoPod
+				
+				closeAllWindows();
+				_connectionHasFailed = true;
+				
+				
+				//reset login or stus enries
+				trace("Connection failed : "+event.info)
+				// destroy videopods if neccesary
+				var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+				navigateToURL(new URLRequest(newVrl), "_self");
+			}
+			
+			private function onRejected(event:NetStatusEvent):void{
+				_connectionIsRejected = true;
+				var bannedReason:String = event.info.application;
+				
+				// Notify user about why connection rejected
+				
+				AppManager.getInstance().ShowUserArray=null;
+				AppManager.getInstance().showArrPos=-1;
+				AppManager.getInstance().userID=0;
+				AppManager.getInstance().userName="";
+				AppManager.getInstance().userRole=0;
+				
+				/* var url:String = FlexGlobals.topLevelApplication.url;
+				var newVrl:String = url.replace(".swf",".html");
+				navigateToURL(new URLRequest(newVrl), "_parent"); */
+				
+				//ExternalInterface.call("reload"); 
+				
+				// destroy pods again here
+				trace("Connection rejected : "+event.info)
+				var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+				navigateToURL(new URLRequest(newVrl), "_self"); 
+			}
+			
+			//this gets called when the server is ready for us
+			private function onSetUserID(event:WowzaCustomEvent):void{
+				currentState = "completed";
+				var user:User = event.eventObj.user;
+				
+				AppManager.getInstance().userID = _userID = user.userId;
+				AppManager.getInstance().userName = _userName = user.userName;
+				AppManager.getInstance().userRole = _userRole = user.userRole;
+				AppManager.getInstance().city = user.city;
+				AppManager.getInstance().age = int(user.age);
+				AppManager.getInstance().ShowUserArray = event.eventObj.showUserArray;
+				
+				var showUserArray:Array = event.eventObj.showUserArray;
+				
+				var actualUsers:int = 0;
+				
+				for(var conts:int=0;conts<showUserArray.length;conts++)
+				{
+					if(showUserArray[conts] != "default")
+					{
+						actualUsers = actualUsers+1;
+					}
+				}
+				
+				AppManager.getInstance().showArrPos = actualUsers;
+				
+				
+				var chatHistory:Array = event.eventObj.chatHistory;
+				var queryHistory:Array=event.eventObj.queryHistory;
+				
+				if(_goToPrivateChat == false)
+				{
+					//go to the lobby chat state
+					//initialise lobby and all 
+				} 
+				else 
+				{
+					Alert.show("something just went wrong please reload the application"); 
+				}
+				
+				clientLobby.initializeLobby(_nc,chatHistory,queryHistory,_userRole);
+			}
+			
+			public function onTitleClose(e:Event=null):void
+			{
+				//var title:PrivateChat = e.target as PrivateChat;
+				/*if(_privateChat != null && AppManager.getInstance().userRole == UserRole.MODERATOR1)
+				{
+					PopUpManager.removePopUp(_privateChat);
+					//_privateChat.chatStopped();
+					_privateChat = null;
+				}*/
+			}
+			
+			private function onKicked(event:WowzaCustomEvent):void{
+				trace("kicked user")
+				//although they have to be in the lobby, put this in for future functionality
+				if(currentState == "LobbyState"){
+					//lobby.onKicked(event.eventObj.message);
+					//kick user
+					_nc.call("kickUserFromDb",null);
+				}
+			}
+			
+			private function onBanned(event:WowzaCustomEvent):void{
+				Alert.show("You have been banned because: " + event.eventObj.message);
+				//ban user
+			}
+			
+			private function onBannedUsersList(event:WowzaCustomEvent):void{
+				//lobby.showBannedUsers(event.eventObj.list);
+				//show banned user list
+			}
+			
+			//when we get the event from the netConnectionClient then we tell the lobby to do something about it
+			private function onReceiveInvite(e:WowzaCustomEvent):void{
+				clientLobby.onReceiveInvite(e.eventObj.invitingUserName);
+				// recive invite to private chat
+			}
+			
+			private function onAcceptInvite(event:WowzaCustomEvent):void{
+				//set the new state of the application
+				//initialise private chat
+			}
+			
+			private function closeLobby():void{
+				//lobby.close();
+				//close lobby 
+			}
+
+			
+			protected function loginPanelLoginHandler(event:LoginEvent):void
+			{
+				if(event.sessionId != null || event.sessionId != "")
+				{  		
+					
+					//Disabled for the portal
+					
+					 /*var url:String = "checkShow.asp";
+					 url = url + "?sessionid="+_sessionID; 
+					//var url:String = 'users.xml';
+					 var loginService:URLRequest = new URLRequest(url);
+					 var loginServiceLoader:URLLoader = new URLLoader(loginService);
+					 loginServiceLoader.dataFormat = URLLoaderDataFormat.VARIABLES;
+					 loginServiceLoader.addEventListener(Event.COMPLETE, onLoginServiceComplete);
+					 loginServiceLoader.addEventListener(IOErrorEvent.IO_ERROR, onLoginServiceIOError);
+					 loginServiceLoader.addEventListener(ErrorEvent.ERROR, onLoginServiceIOError);
+					 loginServiceLoader.addEventListener(HTTPStatusEvent.HTTP_STATUS, onStatusHTTP);
+					 loginServiceLoader.load(loginService); 
+					 trace("sending checkShow.asp"); */
+					
+					
+					for(var i:int=0;i<usersListLocal.length;i++)
+					{
+						var obje:Object = usersListLocal.source[i] as Object;
+						if(obje.sessionID ==  event.sessionId)
+						{
+							onLoginServiceComplete(usersListLocal.source[i]);
+						}
+					}
+					
+					//onLoginServiceComplete(event.loginUser);
+				}
+				else
+				{
+					trace("session Id does not exist");
+					var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+					navigateToURL(new URLRequest(newVrl), "_self"); 
+				} 
+			}
+			
+			private function onStatusHTTP(e:HTTPStatusEvent):void
+			{
+				trace("sttus : "+e.toString())
+			}
+			
+			private function onLoginServiceIOError(e:Event):void
+			{
+				var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+				navigateToURL(new URLRequest(newVrl), "_self"); 
+				trace("error is loading users.xml : "+e.toString());
+			}
+			
+			private function onLoginServiceComplete(data:Object):void
+			{
+				/// CHANGED FOR THE PORTAL
+				
+				/*var datas:URLVariables = (e.target.data) as URLVariables;*/
+				//trace("sessionid  "+sessionid+ " userName " +userName+" userid "+userid+ " province_name " +province_name+" city_name "+city_name+" emailaddress "+emailaddress)
+				//trace("Here in on loginn data : "+data.userid);
+				
+				var datas:Object = data;
+				var sessionid:String  = "";
+				var user:Object = new Object();
+				sessionid = 	FlexGlobals.topLevelApplication.parameters.sessionid; 
+				if(datas != null)
+				{
+					//sessionID = sessionid;
+					user.userid = datas.userid.toString();
+					user.emailaddress = datas.emailaddress.toString();
+					//user.userName = datas.firstname+datas.lastname.toString();
+					user.userName = datas.userName.toString();
+					user.province_name = datas.province_name.toString();
+					user.city_name = datas.city_name.toString();
+					user.birthdate = datas.birthdate.toString();
+					user.roleSelected = "PRE";
+					user.sessionId = _sessionID;
+					if(datas.hasOwnProperty('ip'))
+					{
+						user.ip = datas.ip.toString();
+					}else
+					{
+						user.ip = "127.0.0.1";
+					}
+				
+					if(datas.hasOwnProperty('showid'))
+					{
+						user.showID = datas.showid.toString();
+					}
+					
+					user.showID = "3";
+					AppManager.getInstance().showID = 3;
+					_sessionUser = user;
+					
+					//trace(" _sessionUser showID  "+_sessionUser.showID+" _sessionUser ip  "+_sessionUser.ip+" _sessionUser userid  "+_sessionUser.userid+" _sessionUser sessionid  "+_sessionUser.sessionId+ " userName " +_sessionUser.userName+" userid "+_sessionUser.userid+ " province_name " +_sessionUser.province_name+" city_name "+_sessionUser.city_name+" emailaddress "+_sessionUser.emailaddress)
+					
+					//var url:String =  "http://virtualaudience.abs-cbn.com/abs/services.asmx";
+					var url:String =  "http://virtualaudience.abs-cbn.com/ws/services.asmx";
+					url = url + "?showid="+user.showID;					
+					//trace("check service called for : "+user.showID);
+					
+					wsLoadComplete();
+					
+					 //var requstShowDetails:URLRequest = new URLRequest(url);
+					//var showServiceLoader:URLLoader = new URLLoader(requstShowDetails);
+					//showServiceLoader.dataFormat = URLLoaderDataFormat.VARIABLES;
+					//showServiceLoader.addEventListener(Event.COMPLETE, wsLoadComplete);
+					//showServiceLoader.addEventListener(IOErrorEvent.IO_ERROR, onLoginServiceIOError);
+					//showServiceLoader.addEventListener(ErrorEvent.ERROR, onLoginServiceIOError);
+					//showServiceLoader.load(requstShowDetails); 
+						
+					/* 	var loginWS:WebService = new WebService();
+						loginWS.useProxy = false; 
+						loginWS.ShowDetails.addEventListener("result", wsLoadComplete); 
+						loginWS.LoginOperation.resultFormat = 'e4x'; 
+						loginWS.addEventListener("fault", onFault); 
+						loginWS.loadWSDL(url+"?wsdl");
+						loginWS.ShowDetails(user.showID); */
+				}
+				/* else
+				{
+					var newVrl:String = "http://www.myxph.com/via";
+					navigateToURL(new URLRequest(newVrl), "_self"); 
+				} */
+			}
+			
+			private function onFault(e:FaultEvent):void
+			{
+				
+			}
+			
+			protected function lobby_logoutHandler(event:Event):void{
+				_hasClosedConnection = true;
+				_nc.close();
+				//navigateToURL(new URLRequest(FlexGlobals.topLevelApplication.url), "_self");
+				//dependig on where we are, clean up everything and move on to the login state
+				
+				//ExternalInterface.call("reload"); 
+				//lobby.destroyVideoPods();
+				//destroy pods here
+			}
+			
+			protected function privateChat_goBackToLobbyHandler(event:Event):void{
+				_hasClosedConnection = true;
+				_nc.close();
+				_goToPrivateChat = false;
+				
+				//reset the connection state variables
+				_connectionIsRejected = _connectionHasFailed = _hasClosedConnection = false;
+				
+				//connect to the lobby
+				_nc.connect("rtmp://" + _connectionProps.getServerIP() + "/" + _connectionProps.getApplicationName() + "/" + _connectionProps.getInstanceName(), _userName);
+			}
+			
+			protected function onUserRefresh(e:WowzaCustomEvent):void
+			{
+				//lobby.closePrivateChat(e.eventObj);
+				/* if(lobby.userlistPod != null)
+				{
+				lobby.userlistPod.resetUsers(e.eventObj);
+				} */
+				//refresh user list
+			}
+			
+			protected function onStratPrivateVidChat(e:WowzaCustomEvent):void
+			{
+				clientLobby.openPrivateChatPanel();
+			}
+			
+			protected function onClosePrivateVidChat(e:WowzaCustomEvent):void
+			{
+				var id:Number = Number(e.eventObj.info);
+				var id2:Number = Number(e.eventObj.info2);
+				clientLobby.closePrivateChatPanel(id,id2);
+			}
+			
+			protected function onShowPolls(e:WowzaCustomEvent):void
+			{
+				clientLobby.showPoll(e.eventObj);
+			}
+			
+			protected function onUpdateUser(e:WowzaCustomEvent):void
+			{
+				clientLobby.onUpdateUser(e.eventObj);
+			}
+			
+			protected function closePrivateChat(e:WowzaCustomEvent):void{
+				//lobby.closePrivateChat(e.eventObj);
+			}
+			
+			protected function onPrivateChat(e:WowzaCustomEvent):void{
+				//clientLobby.userlistPod.setprivateChat(e.eventObj);
+				//setup private chat in user list
+			}
+			
+			private function closeAllWindows():void {
+				var popup:IpopUp;
+				var popupPackage:Array;
+				for (var i:Number=0;i<systemManager.popUpChildren.numChildren;i++) 
+				{
+					popupPackage = getQualifiedClassName(systemManager.popUpChildren.getChildAt(i)).split("::");
+					if (popupPackage[0] == "components") {
+						popup = systemManager.popUpChildren.getChildAt(i) as IpopUp;
+						if(popup != null)
+						{
+							popup.closeWindow();
+						}
+					}
+				}
+			}
+			
+			
+			private function removeItemArray(thearray:Array , theItem:String):Array
+			{
+				for(var i:int=0; i<thearray .length;i++)
+				{
+					if(thearray[i] == theItem){
+						thearray.splice(i,1);
+						break;
+					}
+				}
+				
+				return thearray;
+			}
+			
+			private function cleanArray(srcArr:Array):Array
+			{
+				var arr:Array = new Array();
+				for(var i:int=0;i<srcArr.length;i++)
+				{
+					if(srcArr[i]=="default")
+					{
+						arr.splice(i, 1);
+					}
+				}
+				return arr;
+			}
+			
+			protected function application1_creationCompleteHandler(event:FlexEvent):void
+			{
+				ExternalInterface.addCallback("logiCallback",logiCallback);
+				currentState = "loading";
+				loginUser();
+			}
+			
+			private function logiCallback(userName:String, password:String):void
+			{
+				loginUser();
+			}
+			
+			private function loginUser():void
+			{
+				//var sessionid2:String  = "";
+				//sessionid2 = 	FlexGlobals.topLevelApplication.parameters.sessionid; 
+				/*var userName:String  = "";
+				userName = 	FlexGlobals.topLevelApplication.parameters.userName; 
+				var userid:String  = "";
+				userid = 	FlexGlobals.topLevelApplication.parameters.userid; 
+				var province_name:String  = "";
+				province_name = 	FlexGlobals.topLevelApplication.parameters.province_name; 
+				var city_name:String  = "";
+				city_name = 	FlexGlobals.topLevelApplication.parameters.city_name; 
+				var emailaddress:String  = "";
+				emailaddress = 	FlexGlobals.topLevelApplication.parameters.emailaddress; 
+				var birthdate:String  = "";
+				birthdate = 	FlexGlobals.topLevelApplication.parameters.birthdate;
+				var showid:String  = "";
+				showid = 	FlexGlobals.topLevelApplication.parameters.showid;*/
+				
+				
+				
+				//var sessionid:String  = "978978978";
+				
+				var sessionid:String = FlexGlobals.topLevelApplication.parameters.sessionid;
+				
+				/* var userName:String  = "test"; 
+				var userid:String  = "5469781"; 
+				var province_name:String  = "test"; 
+				var city_name:String  = "test"; 
+				var emailaddress:String  = "test@test.com"; 
+				var birthdate:String  = "asd";
+				var showid:String  = "3"; */
+				
+				this.addEventListener("login",loginPanelLoginHandler);
+				var eve:LoginEvent = new LoginEvent("login");
+				var user:Object = new Object();
+				//trace("sessionid  "+sessionid+ " userName " +userName+" userid "+userid+ " province_name " +province_name+" city_name "+city_name+" emailaddress "+emailaddress)
+				if(sessionid != "" != "" && sessionid != null)
+				{
+					/*trace("Sending login ifo")
+					_sessionID = eve.sessionId = sessionid;
+					user.userid = userid;
+					user.emailaddress =emailaddress;
+					user.userName = userName;
+					user.province_name = province_name;
+					user.city_name = city_name;
+					user.birthdate = birthdate;
+					user.roleSelected = "PRE";
+					user.sessionId = sessionid;
+					user.ip = "127.0.0.1";					*/
+					/*if(showid != "" || showid != "null")
+					{
+						user.showID = showid;
+					}*/
+					
+					user.showID = "3";
+					eve.roleSelected	= "PRE";
+					eve.sessionId = sessionid;
+					eve.loginUser = user;
+					dispatchEvent(eve);
+				} 	
+				else	
+				{
+					//_sessionID = eve.sessionId = "1";
+					var newVrl:String = "http://virtualaudience.abs-cbn.com/abs/login.htm";
+					navigateToURL(new URLRequest(newVrl), "_self"); 
+				} 
+				
+				
+			}			
+		]]>
+	</fx:Script>
+	<!--<mx:ProgressBar id="progressbar" width="50%"/>-->
+	<components:UserClientLobby id="clientLobby" width="100%" height="100%" includeIn="completed"/>
+	<mx:ProgressBar id="progressbar" width="40%" includeIn="loading"
+					label.loading="Please wait... Loading application" horizontalCenter.loading="-82"
+					verticalCenter.loading="-148"/>
+</s:Application>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 height="100%" width="100%" skinClass.noPolls="skins.GropSkin"
+		 creationComplete="group1_creationCompleteHandler(event)" xmlns:components="components.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:states>
+		<s:State name="noPolls"/>
+		<s:State name="Polls"/>
+	</s:states>
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		
+		.title
+		{
+			color: #000000;
+		}
+		
+	</fx:Style>
+	<fx:Script>
+		<![CDATA[
+			import com.carlcalderon.arthropod.Debug;
+			import com.encast.NetConnectionManager;
+			import com.encast.WowzaCustomEvent;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+			import mx.managers.PopUpManager;
+			import mx.managers.PopUpManagerChildList;
+			
+			import spark.components.TitleWindow;
+			
+			private var _pollDP:ArrayCollection = new ArrayCollection();
+			
+			private var _nc:NetConnectionManager;
+			private var _so:SharedObject;
+			private var adminlobby:AdminLobby;
+			private var window:QuestionPanel;
+			private var currentyActivePoll:String = "";
+			
+			
+			public function initialisePoll(nc:NetConnectionManager,lobby:AdminLobby):void
+			{
+				_nc= nc;
+				 adminlobby = lobby;
+				_so = SharedObject.getRemote("pollQuestion", _nc.uri, true);
+				_so.addEventListener(SyncEvent.SYNC, onSync);
+				_so.connect(_nc);
+				_so.client = this;
+			}
+			
+			private function onSync(e:SyncEvent):void{		
+				currentState = "noPolls";
+				for(var i:Object in _so.data)
+				{
+					currentState = "Polls";
+					var obj:Object = _so.data[i] as Object;	
+					var pollInfo:Object = new Object();		
+					pollInfo.title = obj.pollTitle;
+					if(obj.pollType == "SUBJECTIVE")
+					{
+						pollInfo.answer = obj.answer;
+						pollInfo.type = "SUBJECTIVE";
+					}
+					else if(obj.pollType == "OBJECTIVE")
+					{
+						obj.answer = obj.pollAnsPerc;
+						pollInfo.type = "OBJECTIVE";
+					}
+					pollInfo.question = obj.pollQues;
+					pollInfo.pollId = obj.pollId;
+					pollInfo.answer = obj.answer;
+					currentyActivePoll = obj.pollId;
+					_pollDP.addItem(pollInfo);				
+					queList.dataProvider = _pollDP;
+				}
+				_so.removeEventListener(SyncEvent.SYNC, onSync);				
+				//queList.dataProvider = _pollDP;
+			}
+			
+			protected function group1_creationCompleteHandler(event:FlexEvent):void
+			{
+				window = new QuestionPanel();
+				window.addEventListener(QuestionPanel.ON_REMOVE_POPUP, removePopUpPrivateChat);
+				window.addEventListener(QuestionPanel.SUBMIT_NEW_QUE, submitQuestion);
+			}
+			
+			private function submitQuestion(e:WowzaCustomEvent):void
+			{
+				if(e.eventObj != null)
+				{
+					var obj:Object = e.eventObj;
+					adminlobby.sendTheMessage("/createPoll/"+obj.title+"/"+obj.que+"/"+obj.type);
+				}
+			}
+			
+			protected function create_clickHandler(event:MouseEvent):void
+			{
+				window = new QuestionPanel();
+				window.addEventListener(QuestionPanel.ON_REMOVE_POPUP, removePopUpPrivateChat);
+				window.addEventListener(QuestionPanel.SUBMIT_NEW_QUE, submitQuestion);
+				PopUpManager.addPopUp(window, this, true,PopUpManagerChildList.POPUP);
+				PopUpManager.centerPopUp(window);
+			}
+			
+			private function removePopUpPrivateChat(e:Event):void
+			{
+				var windows:QuestionPanel = e.currentTarget as QuestionPanel;
+				PopUpManager.removePopUp(windows);
+			}
+			
+			public function setPoll(info:Object):void
+			{
+				currentState = "Polls";
+				if(info != null)
+				{
+					var pollInfo:Object = new Object();		
+					pollInfo.title = info.pollTitle;
+					pollInfo.question = info.pollQues;
+					pollInfo.pollId = info.pollId;
+					pollInfo.type = info.pollType;
+					currentyActivePoll = info.pollId
+					_pollDP.addItem(pollInfo);				
+					queList.dataProvider = _pollDP;
+				}
+			}
+			
+			public function pollingAns(info:Object):void
+			{
+				trace("pollingAns called on mod");
+				for(var i:Object in _so.data)
+				{
+					currentState = "Polls";
+					var obj:Object = _so.data[i] as Object;	
+					var objToinsert:Object;
+					if(info != null)
+					{
+						if(info.pollId == obj.pollId)
+						{
+							objToinsert = getItemFromDP(obj.pollId);
+							var type:String = info.pollType
+							if(type == "SUBJECTIVE")
+							{
+								objToinsert.answer = info.answer;
+								objToinsert.type = "SUBJECTIVE"
+							}
+							else if(type == "OBJECTIVE")
+							{
+								objToinsert.answer = info.pollAnsPerc;
+								objToinsert.type = "OBJECTIVE"
+							}
+							_pollDP.removeItemAt(objToinsert.pos);
+							_pollDP.addItem(objToinsert);				
+							queList.dataProvider = _pollDP;
+						}
+					}					
+				}
+			}	
+			
+			
+			private function getItemFromDP(pollid:String):Object
+			{
+				for(var i:int = 0;i<_pollDP.length;i++)
+				{
+					var objToReturn:Object;
+					var obj:Object = _pollDP.getItemAt(i);
+					if(obj != null)
+					{
+						if(obj.pollId == pollid)
+						{
+							objToReturn = obj;
+							objToReturn.pos = i;
+						}
+					}
+				}
+				return objToReturn;
+			}
+			
+			protected function queList_clickHandler(event:MouseEvent):void
+			{
+				var obj:Object = queList.selectedItem as Object
+				detalsPanel.setDetails(obj);
+			}
+			
+			protected function detalsPanel_creationCompleteHandler(event:FlexEvent):void
+			{
+				detalsPanel.addEventListener("reActivatePoll",onReactivetPoll);
+			}
+			
+			protected function onReactivetPoll(event:WowzaCustomEvent):void
+			{
+				var toActiveID:String = event.eventObj.pollId;
+				var currentActive:String = currentyActivePoll;
+				
+				if( currentActive != "" && toActiveID != null)
+				{
+					adminlobby.sendTheMessage("/reActivePoll/"+toActiveID+"/"+currentActive);
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="5" paddingTop="5" horizontalAlign="center" verticalAlign="middle"/>
+	</s:layout>
+	<s:BorderContainer includeIn="Polls" width="40%" height="100%" backgroundAlpha="0.72"
+					   contentBackgroundAlpha="0.68" contentBackgroundColor="#DCDCDD">
+		<s:layout>
+			<s:VerticalLayout paddingTop="15" paddingBottom="5" paddingLeft="5" paddingRight="5" horizontalAlign="center" verticalAlign="middle"/>
+		</s:layout>
+		<s:Label text="Polls"
+				 fontFamily="Arial" fontSize="22"/>
+		<s:List id="queList" width="100%" height="100%" borderVisible="true"
+				itemRenderer="rendereres.PollListrenderer" click="queList_clickHandler(event)"/>
+		
+	</s:BorderContainer>
+	<s:BorderContainer includeIn="noPolls" width="40%" height="100%" backgroundAlpha="0.72"
+					   backgroundColor="#CECDCD" contentBackgroundColor="#DCDCDD">
+		<s:layout>
+			<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+		</s:layout>
+		<components:MultiLineLabel id="noPoll" fontFamily="Arial"
+								   fontSize="24" text="There are no Polls to display yet"/>
+	</s:BorderContainer>
+	<s:Group id="queDetails" width="60%" height="100%">
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="center" paddingBottom="5" paddingLeft="5"
+							  paddingRight="5" paddingTop="15" verticalAlign="middle"/>
+		</s:layout>
+		<s:Button id="create" label="Create New" click="create_clickHandler(event)"/>
+		<s:Spacer height="10%"/>
+		<components:PollResults id="detalsPanel" width="100%" height="90%" skinClass="spark.skins.spark.PanelSkin"
+				styleName="title" creationComplete="detalsPanel_creationCompleteHandler(event)">
+		</components:PollResults>
+	</s:Group>
+</s:SkinnableContainer>
